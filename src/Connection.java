@@ -1,32 +1,32 @@
 /**
- * @author Zhiqiang Ren 
+ * @author Zhiqiang Ren
  * date: Feb. 4th. 2012
- * 
+ *
  */
 
-package aipackage;
+// package aipackage;
 
 
 public class Connection {
-    
+
     public Connection(Node from, Node to, double weight) {
         m_from = from;
         m_to = to;
         m_weight = weight;
     }
-    
+
     public Node getFromNode() {
         return m_from;
     }
-    
+
     public Node getToNode() {
         return m_to;
     }
-    
+
     public double getWeight() {
         return m_weight;
     }
-    
+
     private double m_weight;
     private double m_deltaw;
 

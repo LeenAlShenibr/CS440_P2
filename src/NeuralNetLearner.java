@@ -1,16 +1,16 @@
 /**
- * @author Zhiqiang Ren 
+ * @author Zhiqiang Ren
  * date: Feb. 4th. 2012
- * 
+ *
  */
-package aipackage;
+// package aipackage;
 
 import java.io.FileNotFoundException;
 import java.util.Random;
 
 /**
  * @author Zhiqiang Ren
- * 
+ *
  */
 public class NeuralNetLearner {
     /**
@@ -51,7 +51,7 @@ public class NeuralNetLearner {
         for (int n = 0; n < 100; ++n) {
             net2.train(inputvs2, outputvs2, 1);
         }
-        
+
         net2.errorrate(inputvs2, outputvs2);
         System.out.println("============================");
 
@@ -59,7 +59,7 @@ public class NeuralNetLearner {
         int[] layers3 = { 15, 30, 1 }; // two layers
         NeuralNet net3 = new NeuralNet(layers3);
         net3.connectAll();
-        
+
         double[][] inputvs3 = data.m_inputvs;
         double[][] outputvs3 = data.m_outputvs;
 
@@ -69,7 +69,7 @@ public class NeuralNetLearner {
             double error = net3.error(inputvs3, outputvs3);
             System.out.println("error is " + error);
         }
-        
+
         net3.errorrate(inputvs3, outputvs3);
 
         return;

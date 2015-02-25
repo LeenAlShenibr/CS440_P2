@@ -1,4 +1,4 @@
-package aipackage;
+// package aipackage;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -47,9 +47,9 @@ public class DataProcessor {
     public DataProcessor(String aFileName) throws FileNotFoundException {
         m_datas = new ArrayList<CreditData>();
         Scanner s = null;
-        
+
         FileReader f = new FileReader(aFileName);
-        
+
         try {
             s = new Scanner(new BufferedReader(f));
             s.useLocale(Locale.US);
@@ -112,8 +112,5 @@ public class DataProcessor {
         }
         return new CreditData(inputs, outputs);
     }
-    
+
 }
-
-
-
