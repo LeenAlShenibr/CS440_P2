@@ -295,7 +295,7 @@ public class DataProcessor {
       }
     }
 
-    return d;
+    return vec;
   }
 
 }
