@@ -1,13 +1,14 @@
-/**
- * @author Zhiqiang Ren
- * date: Feb. 4th. 2012
- *
+/*
+ * CS440 Programming Assignment 2
+ * Author: Zhiqiang Ren
+ * Edited by: Veena Dali and Leen AlShenibr
+ * Date: 2/25/15
  */
-// package aipackage;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class NeuralNet {
@@ -114,11 +115,80 @@ public class NeuralNet {
     // r: rate parameter
     public void train(double [][] inputvs, double [][] outputvs, double r) throws RuntimeException
     {
-        // todo add your code here
-    }
+
+        //For each input lines
+        for(int i = 0; i < inputvs.length; i++)
+        {
+
+            double[] output = evaluate(inputvs[i]);
+
+
+            //For each layer -- backpropagation part
+            for(int j = m_layers.size()-1; j >= 0; j--)
+            {
+
+                //Output Layer
+                if(j == m_layers.size()-1)
+                {
+                    List<Node> outNode = m_layers.get(j);
+                    for(Node node: outNode)
+                    {
+                        node.setBeta((outputvs[i][node.getPos()])-(output[node.getPos()]));
+                    }
+
+                }
+
+                else  //Other layers
+                {
+
+                      List<Node> currentLayer = m_layers.get(j);
+
+                      ///Compute change for each node
+                      for(Node cnode: currentLayer)
+                      {
+
+                          List<Connection> connections = cnode.getOutConnections();
+                          double sum = 0;
+
+                          for(Connection con: connections)
+                          {
+                            Node node = con.getToNode();
+                            double outputTemp = node.getOutput();
+                            double weight = con.getWeight();
+                            sum += (weight*outputTemp) * (1 - outputTemp) * node.getBeta();
+                          }
+
+                          cnode.setBeta(sum);
+
+                    }
+                }
+            }
+
+
+            for(int j = 0; j < m_layers.size()-1; j++)
+            {
+
+                List<Node> layer_i = m_layers.get(j);
+
+                for(Node node: layer_i){
+                    List<Connection> connections = node.getOutConnections();
+                    for(Connection con: connections)
+                    {
+                        Node tempNode = con.getToNode();
+                        double output_j = tempNode.getOutput();
+                        double change = r * node.getOutput()*output_j* (1 - output_j) * tempNode.getBeta();
+
+                        con.addWeight(change);
+                    }
+                }//End node for
+            }//End layer for
+
+        }//End inputs for
+
+    }//end method
 
     // This method shall change the input and output of each node.
-    public double [] evaluate(double [] inputv) throws RuntimeException {
+    public double [] evaluate(double[] inputv) throws RuntimeException {
         if (inputv.length != m_layers.get(0).size()) {
             throw new RuntimeException("incompabile inputv");
         }
@@ -181,7 +251,7 @@ public class NeuralNet {
             double [] results = evaluate(inputs3);
             double target = outputvs3[i][outputvs3[i].length - 1];
             double ret = results[results.length - 1];
-//            System.out.println("target is " + target + ", ret is " + ret);
+          //  System.out.println("target is " + target + ", ret is " + ret);
 
             if (1.1 - target > 0.5) {  // false
                 if (ret > 0.5) {  // decide to be true
@@ -192,6 +262,7 @@ public class NeuralNet {
                     ++accu;
                 }
             }
+
         }
 
         double rate = accu / inputvs3.length;

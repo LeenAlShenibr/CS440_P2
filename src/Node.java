@@ -1,16 +1,14 @@
-/**
- * @author Zhiqiang Ren
- * date: Feb. 4th. 2012
- *
+/*
+ * CS440 Programming Assignment 2
+ * Author: Zhiqiang Ren
+ * Edited by: Veena Dali and Leen AlShenibr
+ * Date: 2/25/15
  */
-
-// package aipackage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Node {
-
     public Node(int layer, int pos, boolean isThreshold)
     {
         m_input = 0;
@@ -36,11 +34,15 @@ public class Node {
         m_output = output;
     }
 
+    public void setBeta(double beta){
+        m_beta = beta;
+    }
+
     public double getOutput() {
         return m_output;
     }
 
-
+		//Sigmoid function
     public double f(double sigma)
     {
         return 1 / (1 + Math.exp(-1 * sigma));
@@ -52,6 +54,10 @@ public class Node {
 
     public Connection getOutputConnection(int j) {
         return m_output_conn.get(j);
+    }
+
+    public List<Connection> getOutConnections(){
+        return m_output_conn;
     }
 
     public List<Connection> getInputConnection() {

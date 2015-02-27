@@ -1,11 +1,9 @@
-/**
- * @author Zhiqiang Ren
- * date: Feb. 4th. 2012
- *
+/*
+ * CS440 Programming Assignment 2
+ * Author: Zhiqiang Ren
+ * Edited by: Veena Dali and Leen AlShenibr
+ * Date: 2/25/15
  */
-
-// package aipackage;
-
 
 public class Connection {
 
@@ -25,6 +23,9 @@ public class Connection {
 
     public double getWeight() {
         return m_weight;
+    }
+    public void addWeight(double weight){
+        m_weight = m_weight +weight;
     }
 
     private double m_weight;
